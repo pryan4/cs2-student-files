@@ -1,5 +1,8 @@
 # cs2-student-files
-This repo has a bunch of great info for you as you work through the course. In order to make the most use of this repo, go ahead a make a [fork right now](https://www.youtube.com/watch?v=MJh7-_8p5bs). ![](https://upload.wikimedia.org/wikipedia/commons/3/38/GitHub_Fork_Button.png)
+This repo has a bunch of great info for you as you work through the course. In order to make the most use of this repo, go ahead a make a [fork right now](https://www.youtube.com/watch?v=MJh7-_8p5bs). 
+
+![](https://upload.wikimedia.org/wikipedia/commons/3/38/GitHub_Fork_Button.png)
+
 In order to keep this file up to date follow the instructions outline [here](https://github.com/KirstieJane/STEMMRoleModels/wiki/Syncing-your-fork-to-the-original-repository-via-the-browser) or watch the [video](https://www.youtube.com/watch?v=XC41YGQYpo4)
 
 1. Open your fork of the repository.
