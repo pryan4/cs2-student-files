@@ -14,7 +14,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
-    fill(0);
+    background(0);
+    fill(255);
     ellipse(frameCount % width, height/2, 40, 40);
 }
