@@ -2,6 +2,4 @@
 
 - Strawberry
 - Cookie Dough
-- Mint
-- Chocolate
-- Rocky Road
+- Bananas
