@@ -3,3 +3,4 @@
 - Strawberry
 - Cookie Dough
 - Mint
+- Chocolate
