@@ -3,4 +3,3 @@
 - Strawberry
 - Cookie Dough
 - Bananas
-- Cookies and Cream
