@@ -2,3 +2,4 @@
 
 - Strawberry
 - Cookie Dough
+- Mint
