@@ -2,3 +2,4 @@
 
 - Strawberry
 - Chocolate Chip Cookie Dough
+- Banana
