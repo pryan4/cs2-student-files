@@ -1,3 +1,7 @@
-# The best ice cream flavor is...
+# The best ice cream flavors are
 
-# Cookie Dough
+- Cookies and Cream
+- Cookie Dough
+- Green Tea
+- Strawberry
+- Vanilla
