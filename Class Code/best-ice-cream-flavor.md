@@ -1,3 +1,3 @@
 # The best ice cream flavor is...
 
-### Cookie Dough
+# Cookie Dough
