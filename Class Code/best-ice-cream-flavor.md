@@ -5,4 +5,3 @@
 - Green Tea
 - Strawberry
 - Vanilla
-- Birthday Cake
