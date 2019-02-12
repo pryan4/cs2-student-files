@@ -1,6 +1,3 @@
-/* This is a starter template for a p5.js sketch. If you don't want to bother with creating a new one every time use this instead. 
-
-Always make a copy of the entire project folder before starting.*/
 
 //Your Name(s)
 //Project Name
@@ -8,11 +5,24 @@ Always make a copy of the entire project folder before starting.*/
 
 /* A brief description of what the program is */
 
+let gen1 = Array(57).fill(0);
 
+let gridsize;
 function setup() {
     createCanvas(400, 400);
+    gen1[round(gen1.length/2)]=1
+    gridsize = width/gen1.length
+    console.log(gridsize)
 }
 
 function draw() {
-    background(220);
+    background(255);
+
+    for(let i = 0; i < gen1.length; i++){
+        if(gen1[i] == 1){
+            noStroke();
+            fill(0);
+            rect(i*gridsize,0,gridsize,gridsize)
+        }
+    }
 }
