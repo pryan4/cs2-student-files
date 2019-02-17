@@ -1,0 +1,7 @@
+{
+  "name": "p5.js-template",
+  "version": "1.0.0",
+  "description": "this is a template for p5.js",
+  "main": "p5-template/sketch.js",
+  "keywords": []
+}
