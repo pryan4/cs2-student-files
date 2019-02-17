@@ -4,11 +4,13 @@
 
 /* A brief description of what the program is */
 
-
 function setup() {
-    createCanvas(400, 400);
+  createCanvas(400, 400);
 }
 
 function draw() {
-    background(220);
+  background(100);
+  fill(255);
+  noStroke();
+  ellipse(mouseX, mouseY, 50, 50);
 }
