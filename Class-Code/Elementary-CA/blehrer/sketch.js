@@ -9,13 +9,13 @@ let genNum = 1;
 let rule = 30;
 let ruleString = "";
 
-const arraySize = 501;
+const pixelNum = 601;
+const arraySize = 4 * pixelNum;
 
 const backgroundColor = 220;
 
 function setup() {
-    createCanvas(arraySize - 1, (arraySize - 1) / 2);
-    pixelDensity(1);
+    createCanvas(pixelNum / 5, pixelNum / 10);
     background(backgroundColor);
 
     let digits = int(rule).toString(2).length;
@@ -26,12 +26,18 @@ function setup() {
     console.log(ruleString);
 
     loadPixels();
-    pixels[3 + (4 * floor(arraySize / 2))] = 255;
+    colorPixel(4 * floor(pixelNum / 2));
     updatePixels();
 }
 
+function colorPixel(index) {
+    for (let i = 0; i < 3; ++i) {
+        pixels[index + i] = 0;
+    }
+}
+
 function newDigit(index) {
-    let codon = String(int(pixels[index - 4] / 255)) + String(int(pixels[index] / 255)) + String(int(pixels[index + 4] / 255));
+    let codon = String(1 - int(pixels[index - 4] / 220)) + String(1 - int(pixels[index] / 220)) + String(1 - int(pixels[index + 4] / 220));
     let value = parseInt(codon, 2);
     return ruleString[7 - value];
 }
@@ -39,13 +45,16 @@ function newDigit(index) {
 function draw() {
     loadPixels();
 
-    let startIndex = 3 + (4 * genNum * arraySize);
+    let startIndex = 4 + ((genNum - 1) * arraySize);
 
-    for (let i = startIndex; i < startIndex + (4 * arraySize) - 8; i += 4) {
-        pixels[i] = newDigit(i) == 1 ? 255 : 255 - backgroundColor;
+    if (startIndex >= pixels.length - arraySize)
+        noLoop();
+
+    for (let i = startIndex; i < startIndex + arraySize - 4; i += 4) {
+        if (newDigit(i) == 1)
+            colorPixel(i + arraySize);
     }
     ++genNum;
 
     updatePixels();
-    noLoop();
 }
