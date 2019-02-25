@@ -6,7 +6,7 @@
 
 let genNum = 1;
 
-let rule = 30;
+let rule = 90;
 let ruleString = "";
 
 const pixelNum = 601;
@@ -15,19 +15,23 @@ const arraySize = 4 * pixelNum;
 const backgroundColor = 220;
 
 function setup() {
-    createCanvas(pixelNum / 5, pixelNum / 10);
+    createCanvas(pixelNum, pixelNum / 2);
     background(backgroundColor);
 
+    console.log(findRuleString());
+
+    loadPixels();
+    colorPixel(4 * floor(pixelNum / 2));
+    updatePixels();
+}
+
+function findRuleString(){
     let digits = int(rule).toString(2).length;
     for (let i = 0; i < 8 - digits; ++i) {
         ruleString += "0";
     }
     ruleString += int(rule).toString(2);
-    console.log(ruleString);
-
-    loadPixels();
-    colorPixel(4 * floor(pixelNum / 2));
-    updatePixels();
+    return ruleString;
 }
 
 function colorPixel(index) {
