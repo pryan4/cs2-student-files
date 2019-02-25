@@ -1,5 +1,5 @@
 //Your Name(s) Alex Wu
-//Project Name Elementary CA
+//Project Name Elementary CA peoject
 //Date FEB 25
 
 /* A brief description of what the program is 
@@ -41,13 +41,13 @@ function draw() {
     m++
 }
 
-function ruleset(uno, dos, tres) {
-    if (uno == 1 && dos == 1 && tres == 1) {return 0}
-    else if (uno == 1 && dos == 1 && tres == 0) {return 1}
-    else if (uno == 1 && dos == 0 && tres == 1) {return 0}
-    else if (uno == 1 && dos == 0 && tres == 0) {return 1}
-    else if (uno == 0 && dos == 1 && tres == 1) {return 1}
-    else if (uno == 0 && dos == 1 && tres == 0) {return 0}
-    else if (uno == 0 && dos == 0 && tres == 1) {return 1}
-    else if (uno == 0 && dos == 0 && tres == 0) {return 0}
+function ruleset(left, middle, right) {
+    if (left == 1 && middle == 1 && right == 1) {return 0}
+    else if (left == 1 && middle == 1 && right == 0) {return 1}
+    else if (left == 1 && middle == 0 && right == 1) {return 0}
+    else if (left == 1 && middle == 0 && right == 0) {return 1}
+    else if (left == 0 && middle == 1 && right == 1) {return 1}
+    else if (left == 0 && middle == 1 && right == 0) {return 0}
+    else if (left == 0 && middle == 0 && right == 1) {return 1}
+    else if (left == 0 && middle == 0 && right == 0) {return 0}
 }
