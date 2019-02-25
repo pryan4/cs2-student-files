@@ -4,11 +4,9 @@
 
 /* A brief description of what the program is */
 
-let ca = [];
-let genNum = 0;
-let cellSize;
+let genNum = 1;
 
-let rule = 90;
+let rule = 30;
 let ruleString = "";
 
 const arraySize = 501;
@@ -16,14 +14,9 @@ const arraySize = 501;
 const backgroundColor = 220;
 
 function setup() {
-    background(backgroundColor);
     createCanvas(arraySize - 1, (arraySize - 1) / 2);
-    noStroke();
-
-    ca[genNum] = Array(arraySize).fill(0);
-    ca[genNum][floor(arraySize / 2)] = 1;
-
-    cellSize = width / arraySize;
+    pixelDensity(1);
+    background(backgroundColor);
 
     let digits = int(rule).toString(2).length;
     for (let i = 0; i < 8 - digits; ++i) {
@@ -31,22 +24,28 @@ function setup() {
     }
     ruleString += int(rule).toString(2);
     console.log(ruleString);
+
+    loadPixels();
+    pixels[3 + (4 * floor(arraySize / 2))] = 255;
+    updatePixels();
 }
 
 function newDigit(index) {
-    let codon = String(ca[genNum][index - 1]) + String(ca[genNum][index]) + String(ca[genNum][index + 1]);
+    let codon = String(int(pixels[index - 4] / 255)) + String(int(pixels[index] / 255)) + String(int(pixels[index + 4] / 255));
     let value = parseInt(codon, 2);
     return ruleString[7 - value];
 }
 
 function draw() {
-    for (let i = 0; i < ca[genNum].length; ++i) {
-        ca[genNum][i] == 0 ? fill(backgroundColor) : fill(0);
-        rect(i * cellSize, cellSize * genNum, cellSize, cellSize);
-    }
-    ca[genNum + 1] = Array(arraySize).fill(0);
-    for (let i = 1; i < arraySize - 1; ++i) {
-        ca[genNum + 1][i] = newDigit(i);
+    loadPixels();
+
+    let startIndex = 3 + (4 * genNum * arraySize);
+
+    for (let i = startIndex; i < startIndex + (4 * arraySize) - 8; i += 4) {
+        pixels[i] = newDigit(i) == 1 ? 255 : 255 - backgroundColor;
     }
     ++genNum;
+
+    updatePixels();
+    noLoop();
 }
