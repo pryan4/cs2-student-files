@@ -4,17 +4,17 @@
 
 /* A brief description of what the program is 
 to mimic the CA operation by javascript*/
-const rules = [0, 1, 0, 1, 1, 0, 1, 0]
+const rules = [0, 0, 0, 1, 1, 1, 1, 0]
 var m = 0
 let ca = []
 let cell_size
-let list_length = 101
+let list_length = 201
 let gen_0 = Array(list_length).fill(0)
 gen_0[Math.floor(list_length / 2)] = 1
 let resetButton
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(800, 800);
     cell_size = width / list_length;
     console.log(cell_size)
     resetButton = createButton('reset')
@@ -85,20 +85,20 @@ function draw() {
 
 function ruleset(left, middle, right) {
     if (left == 1 && middle == 1 && right == 1) {
-        return 0
+        return rules[0]
     } else if (left == 1 && middle == 1 && right == 0) {
-        return 1
+        return rules[1]
     } else if (left == 1 && middle == 0 && right == 1) {
-        return 0
+        return rules[2]
     } else if (left == 1 && middle == 0 && right == 0) {
-        return 1
+        return rules[3]
     } else if (left == 0 && middle == 1 && right == 1) {
-        return 1
+        return rules[4]
     } else if (left == 0 && middle == 1 && right == 0) {
-        return 0
+        return rules[5]
     } else if (left == 0 && middle == 0 && right == 1) {
-        return 1
+        return rules[6]
     } else if (left == 0 && middle == 0 && right == 0) {
-        return 0
+        return rules[7]
     }
 }
