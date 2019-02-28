@@ -6,7 +6,6 @@
 
 let genNum = 1;
 
-let rule = 90;
 let ruleString = "";
 
 const pixelNum = 601;
@@ -14,18 +13,40 @@ const arraySize = 4 * pixelNum;
 
 const backgroundColor = 220;
 
+let ruleBox;
+let inputRule;
+
 function setup() {
     createCanvas(pixelNum, pixelNum / 2);
     background(backgroundColor);
 
-    console.log(findRuleString());
+    ruleBox = createInput("", text);
+    inputRule = createButton('enter');
+    inputRule.mousePressed(assignRule);
+}
 
+function assignRule() {
+    ruleString = "";
+    genNum = 1;
+    background(backgroundColor);
+    setFirstRow();
+
+    let val = ruleBox.value();
+    if (val.length == 8) {
+        ruleString = val;
+        console.log(ruleString);
+    } else {
+        console.log(findRuleString(int(val)));
+    }
+}
+
+function setFirstRow() {
     loadPixels();
     colorPixel(4 * floor(pixelNum / 2));
     updatePixels();
 }
 
-function findRuleString(){
+function findRuleString(rule) {
     let digits = int(rule).toString(2).length;
     for (let i = 0; i < 8 - digits; ++i) {
         ruleString += "0";
@@ -47,12 +68,17 @@ function newDigit(index) {
 }
 
 function draw() {
+    if (ruleString == "")
+        return;
+
     loadPixels();
 
     let startIndex = 4 + ((genNum - 1) * arraySize);
 
-    if (startIndex >= pixels.length - arraySize)
-        noLoop();
+    if (startIndex >= pixels.length - arraySize) {
+        ruleString = "";
+        return;
+    }
 
     for (let i = startIndex; i < startIndex + arraySize - 4; i += 4) {
         if (newDigit(i) == 1)
