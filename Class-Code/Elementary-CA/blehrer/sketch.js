@@ -1,10 +1,24 @@
 //Ben Lehrer
 //Elementary-CA
-//Date
+//Feb 28, 2019
 
-/* A brief description of what the program is */
+/*
+    This program runs an cellular automata
+    algorithm to produce an image given an inputed
+    ruleset. It employes the p5.js pixel array to
+    store the cells and compares each generation to
+    a given rule to determine the make up of the next
+    generation.
+*/
 
-let genNum = 1;
+/* USE:
+    Input a rule number in either binary or decimal
+    into the text field and press the enter button on
+    screen to begin. To run a new rule, simply input
+    the new rule and press enter again.
+*/
+
+let genNum = 0;
 
 let ruleString = "";
 
@@ -27,7 +41,7 @@ function setup() {
 
 function assignRule() {
     ruleString = "";
-    genNum = 1;
+    genNum = 0;
     background(backgroundColor);
     setFirstRow();
 
@@ -47,7 +61,7 @@ function setFirstRow() {
 }
 
 function findRuleString(rule) {
-    let digits = int(rule).toString(2).length;
+    const digits = int(rule).toString(2).length;
     for (let i = 0; i < 8 - digits; ++i) {
         ruleString += "0";
     }
@@ -62,8 +76,10 @@ function colorPixel(index) {
 }
 
 function newDigit(index) {
-    let codon = String(1 - int(pixels[index - 4] / 220)) + String(1 - int(pixels[index] / 220)) + String(1 - int(pixels[index + 4] / 220));
-    let value = parseInt(codon, 2);
+    const left = String(1 - int(pixels[index - 4] / 220));
+    const center = String(1 - int(pixels[index] / 220));
+    const right = String(1 - int(pixels[index + 4] / 220));
+    const value = parseInt(left + center + right, 2);
     return ruleString[7 - value];
 }
 
@@ -73,7 +89,7 @@ function draw() {
 
     loadPixels();
 
-    let startIndex = 4 + ((genNum - 1) * arraySize);
+    const startIndex = 4 + ((genNum) * arraySize);
 
     if (startIndex >= pixels.length - arraySize) {
         ruleString = "";
