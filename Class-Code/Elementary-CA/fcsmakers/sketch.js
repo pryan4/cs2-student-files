@@ -10,7 +10,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
-    fill(255)
-    ellipse(frameCount,height/2,20,20)
+    background(255,0,0);
+    fill(0,255,0)
+    ellipse(frameCount,height/2,50,50)
 }
