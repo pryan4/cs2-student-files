@@ -17,13 +17,12 @@ function draw() {
   background(120);
 
   for (let i = 0; i < gen1.length; i++) {
-    if (gen1(i) == 1) {
+    if (gen1[i] == 1) {
       fill(0);
     } else {
       fill(255);
     }
-      noStroke()
-      rect(i * gridsize, 0, gridsize, gridsize);
-    }
+    noStroke();
+    rect(i * gridsize, 0, gridsize, gridsize);
   }
 }
