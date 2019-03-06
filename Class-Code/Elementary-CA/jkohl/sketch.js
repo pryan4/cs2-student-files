@@ -1,3 +1,7 @@
+//Jacob Kohl
+//Elementary-CA
+//February 26, 2019
+
 const ruleset = [0,1,0,1,1,0,1,0];
 let gensize = 110;
 let gridsize;
