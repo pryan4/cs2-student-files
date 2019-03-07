@@ -25,21 +25,23 @@ function setup() {
 
     for (let i = 1; i < cellCount - 1; ++i) {
         for (let j = 1; j < cellCount - 1; ++j) {
-            ca[i][j] = random() < 0.03 ? 1 : 0;
+            ca[i][j] = random() < 0.05 ? 1 : 0;
         }
     }
 }
 
 function draw() {
+    //display
     background(backgroundColor);
     for (let i = 0; i < cellCount; ++i) {
         for (let j = 0; j < cellCount; ++j) {
             ca[i][j] == 1 ? fill(0) : fill(backgroundColor);
             rect(i * cellSize, j * cellSize, cellSize, cellSize);
         }
+        //1 ? draw rect
     }
 
-    oldCA = ca;
+    let oldCA = ca;
 
     for (let i = 1; i < cellCount - 1; ++i) {
         for (let j = 1; j < cellCount - 1; ++j) {
@@ -57,6 +59,7 @@ function applyRule(CA, x, y) {
             if(i != 0 && j != 0)
                 if(CA[x - i][y - j] == 1)
                     ++neighborhood;
+                    //neighborhood += CA[x - 1][y-j]
         }
     }
 
