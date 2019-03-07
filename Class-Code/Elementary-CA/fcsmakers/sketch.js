@@ -1,8 +1,8 @@
-//Your Name(s)
-//Project Name
-//Date
+// FCS Makers
+// Moving Ball
+// March 1st
 
-/* A brief description of what the program is */
+/* This Ball moves across the screen */
 
 
 function setup() {
@@ -10,5 +10,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(255,0,0);
+    fill(0,255,0)
+    ellipse(frameCount,height/2,50,50)
 }
