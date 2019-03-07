@@ -5,18 +5,18 @@
 /* A brief description of what the program is */
 
 let cellSize;
-let cellCount = 200;
+let cellCount = 400;
 
 let backgroundColor = 220;
 
 let ca = new Array(cellCount);
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(800, 800);
     noStroke();
     fill(0);
 
-    frameRate(3);
+    frameRate(10);
 
     cellSize = width / cellCount;
 
@@ -26,7 +26,7 @@ function setup() {
 
     for (let i = 1; i < cellCount - 1; ++i) {
         for (let j = 1; j < cellCount - 1; ++j) {
-            ca[i][j] = random() < 0.05 ? 1 : 0;
+            ca[i][j] = random() < 0.1 ? 1 : 0;
         }
     }
 }
@@ -56,13 +56,11 @@ function applyRule(CA, x, y) {
     for(let i = -1; i < 2; ++i){
         for(let j = -1; j < 2; ++j){
             if(i != 0 && j != 0)
-                neighborhood += CA[x - 1][y-j]
+                neighborhood += CA[x - i][y-j];
         }
     }
 
-    if(neighborhood < 2)
-        return 0;
-    if(neighborhood > 3)
+    if(neighborhood < 2 || neighborhood > 3)
         return 0;
     if(neighborhood = 3)
         return 1;
