@@ -14,6 +14,7 @@ let ca = new Array(cellCount);
 function setup() {
     createCanvas(600, 600);
     noStroke();
+    fill(0);
 
     frameRate(3);
 
@@ -35,10 +36,8 @@ function draw() {
     background(backgroundColor);
     for (let i = 0; i < cellCount; ++i) {
         for (let j = 0; j < cellCount; ++j) {
-            ca[i][j] == 1 ? fill(0) : fill(backgroundColor);
-            rect(i * cellSize, j * cellSize, cellSize, cellSize);
+            if(ca[i][j] == 1) rect(i * cellSize, j * cellSize, cellSize, cellSize);
         }
-        //1 ? draw rect
     }
 
     let oldCA = ca;
@@ -57,9 +56,7 @@ function applyRule(CA, x, y) {
     for(let i = -1; i < 2; ++i){
         for(let j = -1; j < 2; ++j){
             if(i != 0 && j != 0)
-                if(CA[x - i][y - j] == 1)
-                    ++neighborhood;
-                    //neighborhood += CA[x - 1][y-j]
+                neighborhood += CA[x - 1][y-j]
         }
     }
 
