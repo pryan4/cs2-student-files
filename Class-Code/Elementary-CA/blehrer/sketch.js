@@ -1,52 +1,106 @@
 //Ben Lehrer
 //Elementary-CA
-//Date
+//Feb 28, 2019
 
-/* A brief description of what the program is */
+/*
+    This program runs an cellular automata
+    algorithm to produce an image given an inputed
+    ruleset. It employes the p5.js pixel array to
+    store the cells and compares each generation to
+    a given rule to determine the make up of the next
+    generation.
+*/
 
-let ca = [];
+/* USE:
+    Input a rule number in either binary or decimal
+    into the text field and press the enter button on
+    screen to begin. To run a new rule, simply input
+    the new rule and press enter again.
+*/
+
 let genNum = 0;
-let cellSize;
 
-let rule = 90;
 let ruleString = "";
 
-const arraySize = 501;
+const pixelNum = 601;
+const arraySize = 4 * pixelNum;
 
 const backgroundColor = 220;
 
+let ruleBox;
+let inputRule;
+
 function setup() {
+    createCanvas(pixelNum, pixelNum / 2);
     background(backgroundColor);
-    createCanvas(arraySize - 1, (arraySize - 1) / 2);
-    noStroke();
 
-    ca[genNum] = Array(arraySize).fill(0);
-    ca[genNum][floor(arraySize / 2)] = 1;
+    ruleBox = createInput("", text);
+    inputRule = createButton('enter');
+    inputRule.mousePressed(assignRule);
+}
 
-    cellSize = width / arraySize;
+function assignRule() {
+    ruleString = "";
+    genNum = 0;
+    background(backgroundColor);
+    setFirstRow();
 
-    let digits = int(rule).toString(2).length;
+    let val = ruleBox.value();
+    if (val.length == 8) {
+        ruleString = val;
+        console.log(ruleString);
+    } else {
+        console.log(findRuleString(int(val)));
+    }
+}
+
+function setFirstRow() {
+    loadPixels();
+    colorPixel(4 * floor(pixelNum / 2));
+    updatePixels();
+}
+
+function findRuleString(rule) {
+    const digits = int(rule).toString(2).length;
     for (let i = 0; i < 8 - digits; ++i) {
         ruleString += "0";
     }
     ruleString += int(rule).toString(2);
-    console.log(ruleString);
+    return ruleString;
+}
+
+function colorPixel(index) {
+    for (let i = 0; i < 3; ++i) {
+        pixels[index + i] = 0;
+    }
 }
 
 function newDigit(index) {
-    let codon = String(ca[genNum][index - 1]) + String(ca[genNum][index]) + String(ca[genNum][index + 1]);
-    let value = parseInt(codon, 2);
+    const left = String(1 - int(pixels[index - 4] / 220));
+    const center = String(1 - int(pixels[index] / 220));
+    const right = String(1 - int(pixels[index + 4] / 220));
+    const value = parseInt(left + center + right, 2);
     return ruleString[7 - value];
 }
 
 function draw() {
-    for (let i = 0; i < ca[genNum].length; ++i) {
-        ca[genNum][i] == 0 ? fill(backgroundColor) : fill(0);
-        rect(i * cellSize, cellSize * genNum, cellSize, cellSize);
+    if (ruleString == "")
+        return;
+
+    loadPixels();
+
+    const startIndex = 4 + ((genNum) * arraySize);
+
+    if (startIndex >= pixels.length - arraySize) {
+        ruleString = "";
+        return;
     }
-    ca[genNum + 1] = Array(arraySize).fill(0);
-    for (let i = 1; i < arraySize - 1; ++i) {
-        ca[genNum + 1][i] = newDigit(i);
+
+    for (let i = startIndex; i < startIndex + arraySize - 4; i += 4) {
+        if (newDigit(i) == 1)
+            colorPixel(i + arraySize);
     }
     ++genNum;
+
+    updatePixels();
 }
