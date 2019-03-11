@@ -5,19 +5,20 @@
 /* A brief description of what the program is */
 
 let cellSize;
-const cellCount = 40;
+const cellCount = 200;
 
 const backgroundColor = 220;
 
 let ca = new Array(cellCount);
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(600, 600);
     //noStroke();
     strokeWeight(0.5);
+    noStroke();
     fill(0);
 
-    frameRate(3);
+    frameRate(10);
 
     cellSize = width / cellCount;
 
