@@ -32,7 +32,7 @@ function setup() {
 
     pauseButton = createButton('PAUSE');
     pauseButton.mousePressed(pauseCA);
-    
+
     resetButton = createButton('RESET');
     resetButton.mousePressed(resetCA);
 
@@ -50,6 +50,8 @@ function setup() {
 function draw() {
     if (!started) {
         if (mouseIsPressed) {
+            if(mouseX > width || mouseY > height)
+                return;
             let cellX = floor(map(mouseX, 0, width, 0, cellCount));
             let cellY = floor(map(mouseY, 0, width, 0, cellCount));
             ca[cellX][cellY] = 1;
