@@ -10,7 +10,7 @@
 */
 
 let cellSize;
-const cellCount = 200;
+const cellCount = 100;
 
 let started = false;
 let startButton;
