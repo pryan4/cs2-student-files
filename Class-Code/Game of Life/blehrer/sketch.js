@@ -1,8 +1,13 @@
-//Your Name(s)
-//Project Name
-//Date
+// Ben Lehrer
+// Game of Life
+// March 14th, 2019
 
-/* A brief description of what the program is */
+/*  
+    This is an implementation of Conway's Game of Life in p5.js.
+    It creates a grid on the screen full of cells with states 1 or 0.
+    A rule is applied to each grid state to create a consecutive
+    generation. Follow the directions on the screen to play!
+*/
 
 let cellSize;
 const cellCount = 200;
@@ -48,9 +53,9 @@ function setup() {
 }
 
 function draw() {
-    if (!started) {
-        if (mouseIsPressed) {
-            if(mouseX > width || mouseY > height)
+    if (!started) { //wait until the board is init
+        if (mouseIsPressed) {   //init cells to 1 when mouse is dragged over
+            if (mouseX > width || mouseY > height)
                 return;
             let cellX = floor(map(mouseX, 0, width, 0, cellCount));
             let cellY = floor(map(mouseY, 0, width, 0, cellCount));
@@ -73,6 +78,8 @@ function draw() {
 
     calcNewCA();
 }
+
+
 
 function resetCA() {
     for (let i = 0; i < cellCount; ++i) {
