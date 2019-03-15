@@ -1,8 +1,15 @@
-//Your Name(s)
-//Project Name
-//Date
+//Alex Wu
+//Game of Life
+// 3/15 2019
 
-/* A brief description of what the program is */
+/* A brief description of what the program is 
+
+This project intends to implement the elementary CA in a 2D situation
+and represent the dynacmic change of cells through animation. The cells
+randomized with 1 and 0(50|50% chance) in initial state. And the rules 
+follow the typical one
+
+*/
 let cell_console;
 let cell_size;
 let color = 250;
@@ -18,15 +25,13 @@ function setup() {
     for (i = 0; i < cell_length - 1; i++) {
         cell_console[i] = Array(cell_length).fill(0);
     }
-    //initialize columns and rows of cells with 0
+    //initialize columns and rows of cells
     for (i = 1; i < cell_length - 1; i++) {
         for (j = 1; j < cell_length - 1; j++) {
             cell_console[i][j] = (random() < 0.5) ? 1 : 0;
 
         }
     }
-    
-
     cell_size = width / cell_length;
 }
 
