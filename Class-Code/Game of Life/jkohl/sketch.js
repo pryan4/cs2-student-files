@@ -14,13 +14,17 @@ function setup() {
     columns = floor(width/cellsize);
     rows = floor(height/cellsize)
 
+//creates array    
     for(let row = 0; row < rows; row++){
-        current.push(new Array(columns).fill(0).map(()=>round(random())))
+        current.push(
+            new Array(columns)
+            .fill(0)
+            .map(()=>round(random())))
     }
-    noStroke();
-    current[5][5] = 1
-    current[5][6] = 1
-    current[5][7] = 1
+    // noStroke();
+    // current[5][5] = 1
+    // current[5][6] = 1
+    // current[5][7] = 1
     //noLoop()
 
 
