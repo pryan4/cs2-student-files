@@ -3,7 +3,7 @@
 //Date
 
 /* A brief description of what the program is */
-
+let spectrum;
 function preload() {
     sound = loadSound('groove.mp3');
 }
@@ -18,7 +18,8 @@ function setup() {
 function draw() {
     background(0);
 
-    var spectrum = fft.analyze();
+    spectrum = fft.analyze();
+    //console.log(spectrum);
     noStroke();
     fill(0, 255, 0); // spectrum is green
     for (var i = 0; i < spectrum.length; i++) {
