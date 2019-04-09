@@ -49,6 +49,7 @@ function setup() {
 
 function draw() {
     background(220);
+    
     for(let i = 0; i < bubbles.length; ++i){
         bubbles[i].move();
         bubbles[i].pop();
