@@ -1,6 +1,6 @@
-//Your Name(s)
-//Project Name
-//Date
+//Alex Wu
+//Object, arrays, and classes 
+//April 9th, 2019
 
 /* A brief description of what the program is */
 let bubbles = [];
