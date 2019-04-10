@@ -2,7 +2,9 @@
 //Object, arrays, and classes 
 //April 9th, 2019
 
-/* A brief description of what the program is */
+/* A brief description of what the program is this project aims to use 
+class and objects to animate the movement of bubbles in a canvass*/
+
 let bubbles = [];
 
 function setup() {
