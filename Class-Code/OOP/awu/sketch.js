@@ -3,12 +3,14 @@
 //Date
 
 /* A brief description of what the program is */
-let bubble1
+let bubbles = [];
 
 function setup() {
     createCanvas(400, 400);
-    bubble1 = new Bubble(200,100,10,5,[5,100,200]);
-    bubble2 = new Bubble(100,100,5,20,[200,100,5]);
+    for(i=0; i<1000; i++){
+    let rgb = [random(0,250),random(0,250),random(0,250)]
+    bubbles.push(new Bubble(random(0,400),random(0,400),random(0,10),random(0,5),rgb));
+    }
 }
 
 class Bubble {
@@ -42,8 +44,8 @@ class Bubble {
 
 function draw() {
     background(220);
-    bubble1.show();
-    bubble2.show();
-    bubble1.rmove();
-    bubble2.rmove();
+    for(i=0;i<bubbles.length; i++){
+        bubbles[i].show();
+        bubbles[i].rmove();
+    }
 }
