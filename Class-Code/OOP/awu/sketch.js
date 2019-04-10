@@ -7,24 +7,30 @@ let bubble1
 
 function setup() {
     createCanvas(400, 400);
-    bubble1 = new Bubble();
+    bubble1 = new Bubble(200,100,10,5,[5,100,200]);
+    bubble2 = new Bubble(100,100,5,20,[200,100,5]);
 }
 
 class Bubble {
-    constructor() {
-        this.x = 100;
-        this.y = 200;
-        this.r = 5;
+    constructor(tempX, tempY, tempR, tempV, tempColor) {
+        this.x = tempX;
+        this.y = tempY;
+        this.r = tempR;
+        this.speed = tempV;
+        this.color = tempColor
     }
 
-    rmove(speed) {
-        this.x += random(speed, -speed);
-        this.y += random(speed, -speed);
+    rmove() {
+        this.x += random(this.speed, -this.speed);
+        this.y += random(this.speed, -this.speed);
     }
 
     show() {
         strokeWeight(4);
-        ellipse(this.x, this.y, this.r, this.r);
+        fill(this.color);
+        noStroke();
+        ellipse(this.x, this.y, 2 * this.r);
+        
     }
 
     large(scale) {
@@ -37,5 +43,7 @@ class Bubble {
 function draw() {
     background(220);
     bubble1.show();
-    bubble1.rmove(5);
+    bubble2.show();
+    bubble1.rmove();
+    bubble2.rmove();
 }
