@@ -1,30 +1,40 @@
-//Your Name(s)
-//Project Name
-//Date
+//Alex Wu
+//Object, arrays, and classes 
+//April 9th, 2019
 
-/* A brief description of what the program is */
-let bubble1
+/* A brief description of what the program is this project aims to use 
+class and objects to animate the movement of bubbles in a canvass*/
+
+let bubbles = [];
 
 function setup() {
     createCanvas(400, 400);
-    bubble1 = new Bubble();
+    for(i=0; i<1000; i++){
+    let rgb = [random(0,250),random(0,250),random(0,250)]
+    bubbles.push(new Bubble(random(0,400),random(0,400),random(0,10),random(0,5),rgb));
+    }
 }
 
 class Bubble {
-    constructor() {
-        this.x = 100;
-        this.y = 200;
-        this.r = 5;
+    constructor(tempX, tempY, tempR, tempV, tempColor) {
+        this.x = tempX;
+        this.y = tempY;
+        this.r = tempR;
+        this.speed = tempV;
+        this.color = tempColor
     }
 
-    rmove(speed) {
-        this.x += random(speed, -speed);
-        this.y += random(speed, -speed);
+    rmove() {
+        this.x += random(this.speed, -this.speed);
+        this.y += random(this.speed, -this.speed);
     }
 
     show() {
         strokeWeight(4);
-        ellipse(this.x, this.y, this.r, this.r);
+        fill(this.color);
+        noStroke();
+        ellipse(this.x, this.y, 2 * this.r);
+        
     }
 
     large(scale) {
@@ -36,6 +46,8 @@ class Bubble {
 
 function draw() {
     background(220);
-    bubble1.show();
-    bubble1.rmove(5);
+    for(i=0;i<bubbles.length; i++){
+        bubbles[i].show();
+        bubbles[i].rmove();
+    }
 }
