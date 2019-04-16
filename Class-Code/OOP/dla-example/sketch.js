@@ -1,17 +1,20 @@
 //Mr. Darfler
-//DLA - Starter Code
-//Monday, April 15th 2019
+//DLA Simulation
+//April 16th 2019
 
-/* This sketch creates a simple simulation of 
-diffusion limited aggregation using classes and objects */
+/* This sketch simulates a basic Diffusion
+Limited Aggregation Model using p5.js and
+a walker class */
 
 let walkers = [];
 
 function setup() {
     createCanvas(600, 400);
-    ellipseMode(RADIUS)
-    for (let i = 0; i < 100; i++) {
-        walkers.push(new Walker(random(width), random(height)));
+
+    for (let i = 0; i < 50; i++) {
+        walkers.push(new Walker(
+            random(width), random(height)
+        ));
     }
 
     let seed = new Walker(width / 2, height / 2);
@@ -21,11 +24,13 @@ function setup() {
 
 function draw() {
     background(220);
+
     for (let i = 0; i < walkers.length; i++) {
         walkers[i].move();
         walkers[i].show();
-        for (let j = i + 1; j < walkers.length; j++) {
-            walkers[i].checkCollision(walkers[j]);
+
+        for(let j = i +1; j < walkers.length; j++){
+            walkers[i].checkCollision(walkers[j])
         }
     }
 }
@@ -34,7 +39,7 @@ class Walker {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.r = 5;
+        this.r = 10;
         this.static = false;
     }
 
@@ -43,37 +48,36 @@ class Walker {
             this.x += random(-5, 5);
             this.y += random(-5, 5);
 
-            if(this.x < 0) this.x = 0;
-            if(this.x > width) this.x = width;
-            if(this.y < 0) this.y = 0;
-            if(this.y > height) this.y = height;
+            if (this.x > width) this.x = width;
+            if (this.x < 0) this.x = 0;
+            if (this.y > width) this.y = width;
+            if (this.y < 0) this.y = 0;
         }
-
-
     }
 
     show() {
-        if (!this.static) {
-            fill(200);
-        } else {
+        ellipseMode(RADIUS);
+        if (this.static) {
             fill(0);
+        } else {
+            fill(200);
         }
         ellipse(this.x, this.y, this.r)
     }
 
     checkCollision(other) {
-        if(other.static){
-            let d = dist(this.x, this.y, other.x, other.y);
-            let sumOfRadii = this.r + other.r;
-            
-            let collided = d <= sumOfRadii * 1.25;
-            if (collided && random() > 0.2) {
-                this.static = true;
-            }
-        }
-        
+        let d = dist(this.x, this.y, other.x, other.y);
+        let sumOfRadii = this.r + other.r;
 
-        
-        
+        let collision = d <= sumOfRadii;
+
+        if (collision){
+            // console.log("collision")
+            this.static = true;
+            other.static = true;
+        }
+
+
     }
+
 }
