@@ -7,77 +7,89 @@ Limited Aggregation Model using p5.js and
 a walker class */
 
 let walkers = [];
+let static = [];
+let newStatic;
 
 function setup() {
     createCanvas(600, 400);
+    ellipseMode(RADIUS)
 
-    for (let i = 0; i < 50; i++) {
-        walkers.push(new Walker(
-            random(width), random(height)
-        ));
+    for(let i = 0; i < 500; i++){
+        walkers.push(new Walker(random(width), random(height)));
     }
 
-    let seed = new Walker(width / 2, height / 2);
-    seed.static = true;
-    walkers.push(seed);
+    let seed0 = new Walker(random(width), random(height));
+    let seed1 = new Walker(random(width), random(height));
+
+
+    seed0.static = true;
+    seed1.static = true;
+    static.push(seed0, seed1);
 }
 
 function draw() {
     background(220);
 
-    for (let i = 0; i < walkers.length; i++) {
-        walkers[i].move();
-        walkers[i].show();
-
-        for(let j = i +1; j < walkers.length; j++){
-            walkers[i].checkCollision(walkers[j])
+    //showing, moving and checking
+    for (let w of walkers){
+        w.show();
+        w.move();
+        for(let s of static){
+            w.checkCollision(s)
         }
     }
+
+    //Separate newly aggregated walkers from free float walkers.
+    newStatic = walkers.filter(w => w.static);
+    walkers = walkers.filter(w => !w.static);
+
+    //pushing each newly aggregated walker into static
+    for(eachNew of newStatic) static.push(eachNew);
+
+    //showing all static walkers.
+    for(s of static){
+        s.show();
+    }
+
 }
 
-class Walker {
-    constructor(x, y) {
+class Walker{
+    constructor(x, y){
         this.x = x;
         this.y = y;
-        this.r = 10;
+        this.r = 8;
         this.static = false;
     }
 
-    move() {
-        if (!this.static) {
-            this.x += random(-5, 5);
-            this.y += random(-5, 5);
+    move(){
+        this.x += random(-3,3);
+        this.y += random(-3,3);
 
-            if (this.x > width) this.x = width;
-            if (this.x < 0) this.x = 0;
-            if (this.y > width) this.y = width;
-            if (this.y < 0) this.y = 0;
-        }
+        if(this.x < 0) this.x = 0;
+        if(this.y < 0) this.y = 0;
+
+        if(this.x > width) this.x = width;
+        if(this.y > height) this.y = height;
     }
 
-    show() {
-        ellipseMode(RADIUS);
-        if (this.static) {
+    show(){
+
+        if(this.static){
             fill(0);
         } else {
-            fill(200);
+            fill(255)
         }
+        noStroke();
         ellipse(this.x, this.y, this.r)
     }
 
-    checkCollision(other) {
-        let d = dist(this.x, this.y, other.x, other.y);
-        let sumOfRadii = this.r + other.r;
+    checkCollision(staticWalker){
+        let d = dist(this.x, this.y, staticWalker.x, staticWalker.y);
+        let sumOfRadii = this.r + staticWalker.r;
 
-        let collision = d <= sumOfRadii;
-
-        if (collision){
-            // console.log("collision")
+        if(d <= sumOfRadii){
             this.static = true;
-            other.static = true;
         }
-
-
     }
 
 }
