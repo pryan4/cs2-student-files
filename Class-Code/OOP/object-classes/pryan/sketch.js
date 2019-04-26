@@ -2,7 +2,7 @@
 //OOP
 //April 2019
 
-/* Refactored code into classes */
+/* Refactored code into classes & Objects  */
 
 
 let x, y, r;
