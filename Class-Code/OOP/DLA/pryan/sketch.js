@@ -12,13 +12,11 @@ function setup() {
     createCanvas(600, 400);
     ellipseMode(RADIUS)
     for (let i = 0; i < 500; i++) {
-        walkers.push(new Walker(random(width), random(height)));
+        walkers.push(new Walker(width/2, height/2));
     }
-    let seed0 = new Walker(random(width), random(height))
-    let seed1 = new Walker(random(width), random(height))
+    let seed0 = new Walker(0,0)
     seed0.static = true
-    seed1.static = true
-    static.push(seed0, seed1);
+    static.push(seed0,);
 
 }
 
@@ -32,19 +30,23 @@ function draw() {
 
         }
     }
-    newStatic = walkers.filter(w => !w.static);
+   newstatic = walkers.filter(w => w.static);
     walkers = walkers.filter(w => !w.static);
 
-    for (eachNew of newStatic) static.push(eachNew);
+    for (let eachnew of newstatic) static.push(eachnew);
 
     for (s of static) {
         s.show();
     }
+    if(walkers.length < 500){
+        walkers.push(new Walker(width/2,height/2))
+    }
 }
 class Walker {
     constructor(x, y) {
+        this.x = x
         this.y = y
-        this.r = 8
+        this.r = 2
         this.static = false;
     }
 
@@ -74,11 +76,19 @@ class Walker {
 
         if (d <= sumOfRadii) {
             this.static = true;
+
         }
+        let e = dist(width/2,height/2,this.x,this.y) > height/2;
+        if(e == true){
+            this.static = true;
+        }
+        
+        
+
 
 
     }
-
-
+        
+   
 
 }
