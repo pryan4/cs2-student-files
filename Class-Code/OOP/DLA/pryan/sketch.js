@@ -27,7 +27,7 @@ function setup() {
 }
 
 function draw() {
-    background(220);
+    background(51,143,223);
     for (let w of walkers) {
         w.show()
         w.move()
@@ -78,11 +78,22 @@ class Walker {
     }
     show() {
         if (this.static) {
-            fill(0,255,225);
+            fill(39,222,137);
         } else {
-            fill(100,0,0)
+            fill(222,216,16)
+        }
+        let f = dist(this.x,this.y,width/2,height/2)
+        if(f < width/5){
+            fill(70,39,222)
+        }
+    
+        if(f < width/8){
+            fill(222,39,39)
         }
 
+
+
+        
         noStroke();
         ellipse(this.x, this.y, this.r)
 
