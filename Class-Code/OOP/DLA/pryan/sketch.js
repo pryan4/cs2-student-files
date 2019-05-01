@@ -7,16 +7,22 @@
 let walkers = [];
 let static = [];
 let newStatic;
+let innerRadius;
 
 function setup() {
     createCanvas(600, 400);
+    innerRadius = height / 2;
     ellipseMode(RADIUS)
     for (let i = 0; i < 500; i++) {
-        walkers.push(new Walker(width/2, height/2));
+        let r = innerRadius - 20
+        let theta = random(TWO_PI)
+        let x = cos(theta) * r + width/2;
+        let y = sin(theta) * r + height/2;
+        walkers.push(new Walker(x, y));
     }
-    let seed0 = new Walker(0,0)
+    let seed0 = new Walker(0, 0)
     seed0.static = true
-    static.push(seed0,);
+    static.push(seed0);
 
 }
 
@@ -30,16 +36,27 @@ function draw() {
 
         }
     }
-   newstatic = walkers.filter(w => w.static);
+    newstatic = walkers.filter(w => w.static);
     walkers = walkers.filter(w => !w.static);
 
-    for (let eachnew of newstatic) static.push(eachnew);
-
+    for (let eachnew of newstatic) {
+        let d = dist(eachnew.x,eachnew.y,width/2,height/2)
+        if(d < innerRadius){
+            innerRadius = d;
+            console.log(innerRadius)
+        }
+        static.push(eachnew);
+        
+    }
     for (s of static) {
         s.show();
     }
-    if(walkers.length < 500){
-        walkers.push(new Walker(width/2,height/2))
+    if (walkers.length < 500) {
+        let r = innerRadius
+        let theta = random(TWO_PI)
+        let x = cos(theta) * r + width/2;
+        let y = sin(theta) * r + height/2;
+        walkers.push(new Walker(x,y));
     }
 }
 class Walker {
@@ -61,9 +78,9 @@ class Walker {
     }
     show() {
         if (this.static) {
-            fill(0);
+            fill(0,255,225);
         } else {
-            fill(255)
+            fill(100,0,0)
         }
 
         noStroke();
@@ -78,17 +95,17 @@ class Walker {
             this.static = true;
 
         }
-        let e = dist(width/2,height/2,this.x,this.y) > height/2;
-        if(e == true){
+        let e = dist(width / 2, height / 2, this.x, this.y) > height / 2;
+        if (e == true) {
             this.static = true;
         }
-        
-        
+
+
 
 
 
     }
-        
-   
+
+
 
 }
